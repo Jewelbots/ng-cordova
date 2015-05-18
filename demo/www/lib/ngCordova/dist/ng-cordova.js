@@ -759,6 +759,11 @@ angular.module('ngCordova.plugins.bluetoothle', [])
     return {
       initialize: function (params) {
         var q = $q.defer();
+        if (!bluetoothle) {
+          q.resolve(null);
+          return q.promise;
+        }
+
         bluetoothle.initialize(function(result){
           q.resolve(result);
         }, function(error) {

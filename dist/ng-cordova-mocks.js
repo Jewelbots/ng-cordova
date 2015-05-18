@@ -280,6 +280,13 @@ ngCordovaMocks.factory('$cordovaBluetoothle', ['$q', '$timeout', function ($q, $
     "rssi": -55
   };
 
+  var connected = {
+
+    "name": "Polar H7 3B321015",
+    "address": "ECC037FD-72AE-AFC5-9213-CA785B3B5C63",
+    "status": "connected"
+  };
+
   var devices = [
     deviceConnected
   ];
@@ -545,7 +552,7 @@ ngCordovaMocks.factory('$cordovaBluetoothle', ['$q', '$timeout', function ($q, $
     connect: function (params) {
       var q = $q.defer();
       $timeout(function () {
-        q.resolve(deviceConnected);
+        q.resolve(connected);
       }, 500);
       return q.promise;
     },
@@ -702,7 +709,7 @@ ngCordovaMocks.factory('$cordovaBluetoothle', ['$q', '$timeout', function ($q, $
     },
     readDescriptor: function (params) {
       var q = $q.defer(),
-        readDesciptorData = {};
+        readDescriptorData = {};
       $timeout(function () {
         q.resolve(readDescriptorData);
       }, 100);
