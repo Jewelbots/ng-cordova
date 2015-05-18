@@ -1,3 +1,6 @@
+### New
+- **BluetoothLE plugin** added new BLE plugin that is compatible with Cordova 4.0+; Win8, iOS, Android
+
 # 0.1.11-alpha (01-15-2014)
 
 ### New
@@ -137,7 +140,7 @@ This is a relatively small release to reflect more changes to the **FB plugin**.
 ### NEW
 
 - **Network Plugin** : adding `$on('online')`, `$on('offline')` events 3cccfe409b44710e9677a3d9434b3efe346e6379
-- **0Auth** : salesforce + strava support e0795ce 
+- **0Auth** : salesforce + strava support e0795ce
 - **Facebook** : make more compliant with original plugin and remove unnecessary `init()` from login method. 64b5aa8036d23dd768a2b47c21e760871feb94dd  2218c4d
 - **mocks** : better file plugin 2404142 78e9410  8bac9eb
 - **docs**: ability to search plugins
