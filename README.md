@@ -43,6 +43,7 @@ $ bower install ngCordova
 - [Barcode Scanner](https://github.com/wildabeast/BarcodeScanner)
 - [Battery Status](https://github.com/apache/cordova-plugin-battery-status) *
 - [Bluetooth Low Energy](https://github.com/evothings/cordova-ble)
+- [Bluetooth Low Energy (Compatible with Cordova 4.0+)](https://github.com/randdusing/BluetoothLE)
 - [Bluetooth Serial](https://github.com/don/BluetoothSerial)
 - [Brightness](https://github.com/fiscal-cliff/phonegap-plugin-brightness)
 - [Calendar](https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin)
