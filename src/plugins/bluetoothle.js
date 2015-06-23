@@ -44,7 +44,11 @@ angular.module('ngCordova.plugins.bluetoothle', [])
       startScan: function (params) {
         var q = $q.defer();
         bluetoothle.startScan(function (result){
-          q.resolve(result);
+          if (result.hasOwnProperty('status') && result.status === 'scanResult') {
+            q.resolve(result);
+          } else {
+            q.notify(result);
+          }
         }, function (error) {
           q.reject(error);
         }, params);
