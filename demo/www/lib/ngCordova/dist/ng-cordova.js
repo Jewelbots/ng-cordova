@@ -280,7 +280,7 @@ angular.module('ngCordova.plugins.backgroundGeolocation', [])
 
   ]);
 
-// install  :     cordova plugin add de.appplant.cordova.plugin.badge
+// install  :     cordova plugin add https://github.com/katzer/cordova-plugin-badge.git
 // link     :     https://github.com/katzer/cordova-plugin-badge
 
 angular.module('ngCordova.plugins.badge', [])
@@ -353,7 +353,7 @@ angular.module('ngCordova.plugins.badge', [])
   }]);
 
 // install  :    cordova plugin add https://github.com/wildabeast/BarcodeScanner.git
-// link     :    https://github.com/wildabeast/BarcodeScanner/#using-the-plugin
+// link     :    https://github.com/wildabeast/BarcodeScanner
 
 angular.module('ngCordova.plugins.barcodeScanner', [])
 
@@ -387,8 +387,8 @@ angular.module('ngCordova.plugins.barcodeScanner', [])
     };
   }]);
 
-//  install   :   cordova plugin add org.apache.cordova.battery-status
-//  link      :   https://github.com/apache/cordova-plugin-battery-status/blob/master/doc/index.md
+//  install   :   cordova plugin add cordova-plugin-battery-status
+//  link      :   https://github.com/apache/cordova-plugin-battery-status
 
 angular.module('ngCordova.plugins.batteryStatus', [])
 
@@ -425,7 +425,7 @@ angular.module('ngCordova.plugins.batteryStatus', [])
   .run(['$cordovaBatteryStatus', function ($cordovaBatteryStatus) {
   }]);
 
-//  install   :   cordova plugin add https://github.com/don/cordova-plugin-ble-central#:/plugin
+//  install   :   cordova plugin add https://github.com/don/cordova-plugin-ble-central.git
 //  link      :   https://github.com/don/cordova-plugin-ble-central
 
 angular.module('ngCordova.plugins.ble', [])
@@ -535,7 +535,7 @@ angular.module('ngCordova.plugins.ble', [])
     };
   }]);
 
-// install   :     cordova plugin add com.megster.cordova.bluetoothserial
+// install   :     cordova plugin add https://github.com/don/BluetoothSerial.git
 // link      :     https://github.com/don/BluetoothSerial
 
 angular.module('ngCordova.plugins.bluetoothSerial', [])
@@ -794,7 +794,11 @@ angular.module('ngCordova.plugins.bluetoothle', [])
       startScan: function (params) {
         var q = $q.defer();
         bluetoothle.startScan(function (result){
-          q.resolve(result);
+          if (result.hasOwnProperty('status') && result.status === 'scanResult') {
+            q.resolve(result);
+          } else {
+            q.notify(result);
+          }
         }, function (error) {
           q.reject(error);
         }, params);
@@ -1361,8 +1365,8 @@ angular.module('ngCordova.plugins.calendar', [])
     };
   }]);
 
-// install   :   cordova plugin add org.apache.cordova.camera
-// link      :   https://github.com/apache/cordova-plugin-camera/blob/master/doc/index.md#orgapachecordovacamera
+// install   :   cordova plugin add cordova-plugin-camera
+// link      :   https://github.com/apache/cordova-plugin-camera
 
 angular.module('ngCordova.plugins.camera', [])
 
@@ -1400,8 +1404,8 @@ angular.module('ngCordova.plugins.camera', [])
     };
   }]);
 
-// install   :    cordova plugin add org.apache.cordova.media-capture
-// link      :    https://github.com/apache/cordova-plugin-media-capture/blob/master/doc/index.md
+// install   :    cordova plugin add cordova-plugin-media-capture
+// link      :    https://github.com/apache/cordova-plugin-media-capture
 
 angular.module('ngCordova.plugins.capture', [])
 
@@ -1459,7 +1463,7 @@ angular.module('ngCordova.plugins.capture', [])
     };
   }]);
 
-// install   :     cordova plugin add https://github.com/VersoSolutions/CordovaClipboard
+// install   :     cordova plugin add https://github.com/VersoSolutions/CordovaClipboard.git
 // link      :     https://github.com/VersoSolutions/CordovaClipboard
 
 angular.module('ngCordova.plugins.clipboard', [])
@@ -1494,8 +1498,8 @@ angular.module('ngCordova.plugins.clipboard', [])
     };
   }]);
 
-// install   :     cordova plugin add org.apache.cordova.contacts
-// link      :     https://github.com/apache/cordova-plugin-contacts/blob/master/doc/index.md
+// install   :     cordova plugin add cordova-plugin-contacts
+// link      :     https://github.com/apache/cordova-plugin-contacts
 
 angular.module('ngCordova.plugins.contacts', [])
 
@@ -1582,8 +1586,8 @@ angular.module('ngCordova.plugins.datePicker', [])
     };
   }]);
 
-// install   :     cordova plugin add org.apache.cordova.device
-// link      :     https://github.com/apache/cordova-plugin-device/blob/master/doc/index.md
+// install   :     cordova plugin add cordova-plugin-device
+// link      :     https://github.com/apache/cordova-plugin-device
 
 angular.module('ngCordova.plugins.device', [])
 
@@ -1592,7 +1596,7 @@ angular.module('ngCordova.plugins.device', [])
     return {
       /**
        * Returns the whole device object.
-       * @see https://github.com/apache/cordova-plugin-device/blob/master/doc/index.md
+       * @see https://github.com/apache/cordova-plugin-device
        * @returns {Object} The device object.
        */
       getDevice: function () {
@@ -1601,7 +1605,7 @@ angular.module('ngCordova.plugins.device', [])
 
       /**
        * Returns the Cordova version.
-       * @see https://github.com/apache/cordova-plugin-device/blob/master/doc/index.md#devicecordova
+       * @see https://github.com/apache/cordova-plugin-device#devicecordova
        * @returns {String} The Cordova version.
        */
       getCordova: function () {
@@ -1610,7 +1614,7 @@ angular.module('ngCordova.plugins.device', [])
 
       /**
        * Returns the name of the device's model or product.
-       * @see https://github.com/apache/cordova-plugin-device/blob/master/doc/index.md#devicemodel
+       * @see https://github.com/apache/cordova-plugin-device#devicemodel
        * @returns {String} The name of the device's model or product.
        */
       getModel: function () {
@@ -1627,7 +1631,7 @@ angular.module('ngCordova.plugins.device', [])
 
       /**
        * Returns the device's operating system name.
-       * @see https://github.com/apache/cordova-plugin-device/blob/master/doc/index.md#deviceplatform
+       * @see https://github.com/apache/cordova-plugin-device#deviceplatform
        * @returns {String} The device's operating system name.
        */
       getPlatform: function () {
@@ -1636,7 +1640,7 @@ angular.module('ngCordova.plugins.device', [])
 
       /**
        * Returns the device's Universally Unique Identifier.
-       * @see https://github.com/apache/cordova-plugin-device/blob/master/doc/index.md#deviceuuid
+       * @see https://github.com/apache/cordova-plugin-device#deviceuuid
        * @returns {String} The device's Universally Unique Identifier
        */
       getUUID: function () {
@@ -1645,7 +1649,7 @@ angular.module('ngCordova.plugins.device', [])
 
       /**
        * Returns the operating system version.
-       * @see https://github.com/apache/cordova-plugin-device/blob/master/doc/index.md#deviceversion
+       * @see https://github.com/apache/cordova-plugin-device#deviceversion
        * @returns {String}
        */
       getVersion: function () {
@@ -1654,8 +1658,8 @@ angular.module('ngCordova.plugins.device', [])
     };
   }]);
 
-// install   :     cordova plugin add org.apache.cordova.device-motion
-// link      :     https://github.com/apache/cordova-plugin-device-motion/blob/master/doc/index.md
+// install   :     cordova plugin add cordova-plugin-device-motion
+// link      :     https://github.com/apache/cordova-plugin-device-motion
 
 angular.module('ngCordova.plugins.deviceMotion', [])
 
@@ -1702,8 +1706,8 @@ angular.module('ngCordova.plugins.deviceMotion', [])
     };
   }]);
 
-// install   :     cordova plugin add org.apache.cordova.device-orientation
-// link      :     https://github.com/apache/cordova-plugin-device-orientation/blob/master/doc/index.md
+// install   :     cordova plugin add cordova-plugin-device-orientation
+// link      :     https://github.com/apache/cordova-plugin-device-orientation
 
 angular.module('ngCordova.plugins.deviceOrientation', [])
 
@@ -1753,8 +1757,8 @@ angular.module('ngCordova.plugins.deviceOrientation', [])
     };
   }]);
 
-// install   :     cordova plugin add org.apache.cordova.dialogs
-// link      :     https://github.com/apache/cordova-plugin-dialogs/blob/master/doc/index.md
+// install   :     cordova plugin add cordova-plugin-dialogs
+// link      :     https://github.com/apache/cordova-plugin-dialogs
 
 angular.module('ngCordova.plugins.dialogs', [])
 
@@ -1818,7 +1822,7 @@ angular.module('ngCordova.plugins.dialogs', [])
     };
   }]);
 
-// install  :     cordova plugin add https://github.com/katzer/cordova-plugin-email-composer.git@0.8.2
+// install  :     cordova plugin add https://github.com/katzer/cordova-plugin-email-composer.git
 // link     :     https://github.com/katzer/cordova-plugin-email-composer
 
 angular.module('ngCordova.plugins.emailComposer', [])
@@ -1856,7 +1860,7 @@ angular.module('ngCordova.plugins.emailComposer', [])
     };
   }]);
 
-// install   :   cordova -d plugin add /Users/your/path/here/phonegap-facebook-plugin --variable APP_ID="123456789" --variable APP_NAME="myApplication"
+// install   :   cordova -d plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="123456789" --variable APP_NAME="myApplication"
 // link      :   https://github.com/Wizcorp/phonegap-facebook-plugin
 
 angular.module('ngCordova.plugins.facebook', [])
@@ -2040,8 +2044,8 @@ angular.module('ngCordova.plugins.facebookAds', [])
     };
   }]);
 
-// install   :     cordova plugin add org.apache.cordova.file
-// link      :     https://github.com/apache/cordova-plugin-file/blob/master/doc/index.md
+// install   :     cordova plugin add cordova-plugin-file
+// link      :     https://github.com/apache/cordova-plugin-file
 
 angular.module('ngCordova.plugins.file', [])
 
@@ -2733,7 +2737,7 @@ angular.module('ngCordova.plugins.file', [])
     }];
   }]);
 
-// install   :      cordova plugin add https://github.com/pwlin/cordova-plugin-file-opener2
+// install   :      cordova plugin add https://github.com/pwlin/cordova-plugin-file-opener2.git
 // link      :      https://github.com/pwlin/cordova-plugin-file-opener2
 
 angular.module('ngCordova.plugins.fileOpener2', [])
@@ -2777,8 +2781,8 @@ angular.module('ngCordova.plugins.fileOpener2', [])
     };
   }]);
 
-// install   :     cordova plugin add org.apache.cordova.file-transfer
-// link      :     https://github.com/apache/cordova-plugin-file-transfer/blob/master/doc/index.md
+// install   :     cordova plugin add cordova-plugin-file-transfer
+// link      :     https://github.com/apache/cordova-plugin-file-transfer
 
 angular.module('ngCordova.plugins.fileTransfer', [])
 
@@ -3057,8 +3061,8 @@ angular.module('ngCordova.plugins.ga', [])
     };
   }]);
 
-// install   :     cordova plugin add org.apache.cordova.geolocation
-// link      :     https://github.com/apache/cordova-plugin-geolocation/blob/master/doc/index.md
+// install   :     cordova plugin add cordova-plugin-geolocation
+// link      :     https://github.com/apache/cordova-plugin-geolocation
 
 angular.module('ngCordova.plugins.geolocation', [])
 
@@ -3105,8 +3109,8 @@ angular.module('ngCordova.plugins.geolocation', [])
     };
   }]);
 
-// install   :      cordova plugin add org.apache.cordova.globalization
-// link      :      https://github.com/apache/cordova-plugin-globalization/blob/master/doc/index.md
+// install   :      cordova plugin add cordova-plugin-globalization
+// link      :      https://github.com/apache/cordova-plugin-globalization
 
 angular.module('ngCordova.plugins.globalization', [])
 
@@ -3696,7 +3700,7 @@ angular.module('ngCordova.plugins.googlePlayGame', [])
 
   }]);
 
-// install  :     cordova plugin add nl.x-services.plugins.googleplus
+// install  :     cordova plugin add https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git
 // link     :     https://github.com/EddyVerbruggen/cordova-plugin-googleplus
 
 angular.module('ngCordova.plugins.googleplus', [])
@@ -3751,7 +3755,7 @@ angular.module('ngCordova.plugins.googleplus', [])
 
   }]);
 
-// install   :      cordova plugin add https://github.com/Telerik-Verified-Plugins/HealthKit
+// install   :      cordova plugin add https://github.com/Telerik-Verified-Plugins/HealthKit.git
 // link      :      https://github.com/Telerik-Verified-Plugins/HealthKit
 
 angular.module('ngCordova.plugins.healthKit', [])
@@ -4164,8 +4168,8 @@ angular.module('ngCordova.plugins.imagePicker', [])
     };
   }]);
 
-// install   :     cordova plugin add org.apache.cordova.inappbrowser
-// link      :     https://github.com/apache/cordova-plugin-inappbrowser/blob/master/doc/index.md
+// install   :     cordova plugin add cordova-plugin-inappbrowser
+// link      :     https://github.com/apache/cordova-plugin-inappbrowser
 
 angular.module('ngCordova.plugins.inAppBrowser', [])
 
@@ -4276,7 +4280,7 @@ angular.module('ngCordova.plugins.insomnia', [])
 
   }]);
 
-// install   :   cordova plugins add https://github.com/vstirbu/InstagramPlugin
+// install   :   cordova plugins add https://github.com/vstirbu/InstagramPlugin.git
 // link      :   https://github.com/vstirbu/InstagramPlugin
 
 angular.module('ngCordova.plugins.instagram', [])
@@ -4420,8 +4424,8 @@ angular.module('ngCordova.plugins.keychain', [])
     };
   }]);
 
-// install   :  cordova plugin add de.appplant.cordova.plugin.local-notification
-// link      :  https://github.com/katzer/cordova-plugin-local-notifications/
+// install   :  cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications.git
+// link      :  https://github.com/katzer/cordova-plugin-local-notifications
 
 angular.module('ngCordova.plugins.localNotification', [])
 
@@ -4778,7 +4782,6 @@ angular.module('ngCordova.plugins.localNotification', [])
     };
   }]);
 
-
 // install  :     cordova plugin add https://github.com/floatinghotpot/cordova-plugin-mmedia.git
 // link     :     https://github.com/floatinghotpot/cordova-plugin-mmedia
 
@@ -4884,7 +4887,7 @@ angular.module('ngCordova.plugins.mMediaAds', [])
     };
   }]);
 
-// install   :      cordova plugin add org.apache.cordova.media
+// install   :      cordova plugin add cordova-plugin-media
 // link      :      https://github.com/apache/cordova-plugin-media
 
 angular.module('ngCordova.plugins.media', [])
@@ -5331,8 +5334,8 @@ angular.module('ngCordova.plugins.nativeAudio', [])
     };
   }]);
 
-// install   :      cordova plugin add org.apache.cordova.network-information
-// link      :      https://github.com/apache/cordova-plugin-network-information/blob/master/doc/index.md
+// install   :      cordova plugin add cordova-plugin-network-information
+// link      :      https://github.com/apache/cordova-plugin-network-information
 
 angular.module('ngCordova.plugins.network', [])
 
@@ -6487,7 +6490,7 @@ angular.module('ngCordova.plugins.prefs', [])
     };
   }]);
 
-// install   : cordova plugin add de.appplant.cordova.plugin.printer
+// install   : cordova plugin add https://github.com/katzer/cordova-plugin-printer.git
 // link      : https://github.com/katzer/cordova-plugin-printer
 
 angular.module('ngCordova.plugins.printer', [])
@@ -6515,7 +6518,7 @@ angular.module('ngCordova.plugins.printer', [])
     };
   }]);
 
-// install   :      cordova plugin add org.pbernasconi.progressindicator
+// install   :      cordova plugin add https://github.com/pbernasconi/cordova-progressIndicator.git
 // link      :      http://pbernasconi.github.io/cordova-progressIndicator/
 
 angular.module('ngCordova.plugins.progressIndicator', [])
@@ -6850,8 +6853,8 @@ angular.module('ngCordova.plugins.spinnerDialog', [])
 
   }]);
 
-// install   :      cordova plugin add org.apache.cordova.splashscreen
-// link      :      https://github.com/apache/cordova-plugin-splashscreen/blob/master/doc/index.md
+// install   :      cordova plugin add cordova-plugin-splashscreen
+// link      :      https://github.com/apache/cordova-plugin-splashscreen
 
 angular.module('ngCordova.plugins.splashscreen', [])
 
@@ -6869,8 +6872,8 @@ angular.module('ngCordova.plugins.splashscreen', [])
 
   }]);
 
-// install   :      cordova plugin add https://github.com/brodysoft/Cordova-SQLitePlugin.git
-// link      :      https://github.com/brodysoft/Cordova-SQLitePlugin/blob/master/README.md
+// install   :      cordova plugin add https://github.com/litehelpers/Cordova-sqlite-storage.git
+// link      :      https://github.com/litehelpers/Cordova-sqlite-storage
 
 angular.module('ngCordova.plugins.sqlite', [])
 
@@ -6960,8 +6963,8 @@ angular.module('ngCordova.plugins.sqlite', [])
     };
   }]);
 
-// install   :      cordova plugin add org.apache.cordova.statusbar
-// link      :      https://github.com/apache/cordova-plugin-statusbar/
+// install   :      cordova plugin add cordova-plugin-statusbar
+// link      :      https://github.com/apache/cordova-plugin-statusbar
 
 angular.module('ngCordova.plugins.statusbar', [])
 
@@ -7149,8 +7152,8 @@ angular.module('ngCordova.plugins.touchid', [])
     };
   }]);
 
-// install   :      cordova plugin add org.apache.cordova.vibration
-// link      :      https://github.com/apache/cordova-plugin-vibration/blob/master/doc/index.md
+// install   :      cordova plugin add cordova-plugin-vibration
+// link      :      https://github.com/apache/cordova-plugin-vibration
 
 angular.module('ngCordova.plugins.vibration', [])
 

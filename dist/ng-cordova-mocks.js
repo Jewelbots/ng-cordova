@@ -1216,7 +1216,7 @@ ngCordovaMocks.factory('$cordovaDeviceMotion', ['$interval', '$q', function ($in
       if (this.throwsError) {
         defer.reject('There was an error watching the current acceleration.');
       } else {
-        var delay = 10000;		// The default based on https://github.com/apache/cordova-plugin-device-motion/blob/master/doc/index.md
+        var delay = 10000;		// The default based on https://github.com/apache/cordova-plugin-device-motion
         if (options && options.frequency) {
           delay = options.frequency;
         }
@@ -1354,7 +1354,7 @@ ngCordovaMocks.factory('$cordovaDeviceOrientation', ['$interval', '$q', function
       if (self.throwsError) {
         defer.reject('There was an error getting the compass heading.');
       } else {
-        var delay = 100;		// The default based on https://github.com/apache/cordova-plugin-device-orientation/blob/master/doc/index.md
+        var delay = 100;		// The default based on https://github.com/apache/cordova-plugin-device-orientation
         if (options && options.frequency) {
           delay = options.frequency;
         }
@@ -2701,7 +2701,7 @@ ngCordovaMocks.factory('$cordovaNetwork', function () {
      *
      * @description
      * They type of connection. Values should match those found at
-     * https://github.com/apache/cordova-plugin-network-information/blob/master/doc/index.md
+     * https://github.com/apache/cordova-plugin-network-information
      * This property should only be used in automated tests.
      **/
     connectionType: connectionType,
@@ -3333,7 +3333,7 @@ ngCordovaMocks.factory('$cordovaVibration', ['$timeout', function ($timeout) {
 
     /* jshint ignore:start */
     vibrateWithPattern: function (pattern, repeat) {
-      // Based on the documentation (https://github.com/apache/cordova-plugin-vibration/blob/master/doc/index.md)
+      // Based on the documentation (https://github.com/apache/cordova-plugin-vibration)
       // This method is deprecated. For that reason, this isn't implemented at this time.
     },
     /* jshint ignore:end */
