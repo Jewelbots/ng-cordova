@@ -1,6 +1,6 @@
 /*!
  * ngCordova
- * v0.1.15-alpha
+ * v0.1.17-alpha
  * Copyright 2014 Drifty Co. http://drifty.com/
  * See LICENSE in this repository for license information
  */
@@ -774,6 +774,30 @@ ngCordovaMocks.factory('$cordovaBluetoothle', ['$q', '$timeout', function ($q, $
   }
 }]);
 
+ngCordovaMocks.factory('$cordovaBrightness', ['$q', function ($q) {
+	var currentBrightness = 100;
+
+	return {
+		get: function () {
+			var q = $q.defer();
+			q.resolve(currentBrightness);
+        	return q.promise;
+		},
+
+		set: function (data) {
+			var q = $q.defer();
+			currentBrightness = data;
+			q.resolve('OK');
+        	return q.promise;
+		},
+
+		setKeepScreenOn: function (bool) {
+			var q = $q.defer();
+			q.resolve('OK');
+			return q.promise;
+		}
+	};
+}]);
 /**
  * @ngdoc service
  * @name ngCordovaMocks.cordovaCamera

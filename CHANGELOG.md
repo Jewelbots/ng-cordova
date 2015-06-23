@@ -253,7 +253,6 @@ The same goes for `geolocation` and `DeviceOrientation`.
 
 
 
-
 # 0.1.7-alpha (11-05-2014)
 
 This is a micro-release to fix the issue with `bower` installing `v0.1.5-alpha`, resolving #418.
@@ -479,3 +478,6 @@ ngCordova is ready for some bleeding edge testing. So far we support the followi
 
 
 Give it a try, and please report lots of issues and contribute PRs. :icecream:
+=======
+Please refer to the [Github ngCordova Releases file](https://github.com/driftyco/ng-cordova/releases) for detailed information.
+
