@@ -754,7 +754,7 @@ angular.module('ngCordova.plugins.bluetoothSerial', [])
 
 angular.module('ngCordova.plugins.bluetoothle', [])
 
-  .factory('$cordovaBluetoothle', ['$q', function($q){
+  .factory('$cordovaBluetoothle', ['$q', '$timeout', function($q, $timeout){
 
     return {
       initialize: function (params) {
@@ -792,10 +792,15 @@ angular.module('ngCordova.plugins.bluetoothle', [])
         return q.promise;
       },
       startScan: function (params) {
+        if (!params.hasOwnProperty('time')) {
+          params.time = 5000;
+        }
         var q = $q.defer();
-        bluetoothle.startScan(function (result){
+        bluetoothle.startScan(function (result) {
           if (result.hasOwnProperty('status') && result.status === 'scanResult') {
-            q.resolve(result);
+            $timeout(function () {
+              q.resolve(result)
+            }, params.time);
           } else {
             q.notify(result);
           }
