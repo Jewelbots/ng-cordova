@@ -264,7 +264,7 @@ angular.module('ngCordova.plugins.bluetoothle', [])
       */
       find: function (params) {
         var q = $q.defer();
-        if (params.hasOwnProperty('address') && params.address.length > 0) {
+        if ((params.hasOwnProperty('address') && params.address.length > 0) || (params.hasOwnProperty('name') && params.name.length > 0)) {
           bluetoothle.startScan(function (result) {
             if (result.hasOwnProperty('scanResult') && ((result.scanResult.hasOwnProperty('address') && result.scanResult.address === params.address) || (result.hasOwnProperty('scanResult') && result.scanResult.hasOwnProperty('name') && result.scanResult.name.toLowerCase() === params.name.toLowerCase()))) {
                 q.resolve(result);
@@ -277,7 +277,7 @@ angular.module('ngCordova.plugins.bluetoothle', [])
           }, params);
         }
         else {
-          q.reject({ error: 'no devices found with that criteria.', params: params});
+          q.reject({ error: 'find requires \'name\' or \'address\' params ', params: params});
         }
         return q.promise;
       },
