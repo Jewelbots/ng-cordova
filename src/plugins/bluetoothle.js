@@ -263,14 +263,10 @@ angular.module('ngCordova.plugins.bluetoothle', [])
         params: used to find a specific device by name or address.
       */
       find: function (params) {
-        var cancelInMs = params.time || 10000;
         var q = $q.defer();
-        $timeout(function () {
-          return stopScan();
-        }, cancelInMs);
         if (params.hasOwnProperty('address') && params.address.length > 0) {
           bluetoothle.startScan(function (result) {
-            if (result.hasOwnProperty('scanResult') && result.scanResult.hasOwnProperty('address') && result.scanResult.address === params.address) {
+            if (result.hasOwnProperty('scanResult') && ((result.scanResult.hasOwnProperty('address') && result.scanResult.address === params.address) || (result.hasOwnProperty('scanResult') && result.scanResult.hasOwnProperty('name') && result.scanResult.name.toLowerCase() === params.name.toLowerCase()))) {
                 q.resolve(result);
             }
             else {
@@ -279,18 +275,9 @@ angular.module('ngCordova.plugins.bluetoothle', [])
           }, function (error) {
             q.reject(error);
           }, params);
-        } else if (params.hasOwnProperty('name') && params.name.length > 0) {
-          bluetoothle.startScan(function (result) {
-            if (result.hasOwnProperty('scanResult') && result.scanResult.hasOwnProperty('name') && result.scanResult.name.toLowerCase() === params.name.toLowerCase()) {
-              q.resolve(result);
-            }
-            else {
-              q.notify(result);
-            }
-          });
         }
         else {
-          return startScan(params);
+          q.reject({ error: 'no devices found with that criteria.', params: params});
         }
         return q.promise;
       },
