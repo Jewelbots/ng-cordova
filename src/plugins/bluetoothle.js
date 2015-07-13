@@ -266,17 +266,15 @@ angular.module('ngCordova.plugins.bluetoothle', [])
         var q = $q.defer();
         if ((params.hasOwnProperty('address') && params.address.length > 0) || (params.hasOwnProperty('name') && params.name.length > 0)) {
           bluetoothle.startScan(function (result) {
-            if (result.hasOwnProperty('scanResult') && ((result.scanResult.hasOwnProperty('address') && result.scanResult.address === params.address) || (result.hasOwnProperty('scanResult') && result.scanResult.hasOwnProperty('name') && result.scanResult.name.toLowerCase() === params.name.toLowerCase()))) {
+            if ((result.hasOwnProperty('status') && result.status === 'scanResult') && (result.hasOwnProperty('address') && result.address === params.address) || (result.hasOwnProperty('name') && result.name.toLowerCase() === params.name.toLowerCase())) {
                 q.resolve(result);
-            }
-            else {
+            } else {
               q.notify(result);
             }
           }, function (error) {
             q.reject(error);
           }, params);
-        }
-        else {
+        } else {
           q.reject({ error: 'find requires \'name\' or \'address\' params ', params: params});
         }
         return q.promise;
