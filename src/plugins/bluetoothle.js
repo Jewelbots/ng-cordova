@@ -266,7 +266,7 @@ angular.module('ngCordova.plugins.bluetoothle', [])
         var cancelInMs = params.time || 10000;
         var q = $q.defer();
         $timeout(function () {
-          return bluetoothle.stopScan();
+          return stopScan();
         }, cancelInMs);
         if (params.hasOwnProperty('address') && params.address.length > 0) {
           bluetoothle.startScan(function (result) {
