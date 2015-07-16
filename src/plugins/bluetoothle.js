@@ -80,7 +80,18 @@ angular.module('ngCordova.plugins.bluetoothle', [])
       connect: function(params) {
         var q = $q.defer();
         bluetoothle.connect(function(result){
-          q.resolve(result);
+          if (result.hasOwnProperty('status') && result.status === 'connected') {
+            q.resolve(result);
+          }
+          else if(result.hasOwnProperty('status') && result.status === 'connecting') {
+            q.notify(result)
+          }
+          else if (result.hasOwnProperty('status') && result.status === 'disconnected') {
+            q.reject(result);
+          }
+          else {
+            q.notify(result);
+          }
         }, function(error) {
           q.reject(error);
         }, params);
