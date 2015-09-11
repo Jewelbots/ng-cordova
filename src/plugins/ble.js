@@ -1,18 +1,29 @@
 //  install   :   cordova plugin add https://github.com/don/cordova-plugin-ble-central.git
 //  link      :   https://github.com/don/cordova-plugin-ble-central
 
+/* globals ble: true */
 angular.module('ngCordova.plugins.ble', [])
 
-  .factory('$cordovaBLE', ['$q', function ($q) {
+  .factory('$cordovaBLE', ['$q', '$timeout', function ($q, $timeout) {
 
     return {
       scan: function (services, seconds) {
         var q = $q.defer();
-        ble.scan(services, seconds, function (result) {
-          q.resolve(result);
+
+        ble.startScan(services, function (result) {
+          q.notify(result);
         }, function (error) {
           q.reject(error);
         });
+
+        $timeout(function () {
+            ble.stopScan(function () {
+              q.resolve();
+            }, function (error) {
+              q.reject(error);
+            });
+        }, seconds*1000);
+
         return q.promise;
       },
 
@@ -66,9 +77,9 @@ angular.module('ngCordova.plugins.ble', [])
         return q.promise;
       },
 
-      notify: function (deviceID, serviceUUID, characteristicUUID) {
+      startNotification: function (deviceID, serviceUUID, characteristicUUID) {
         var q = $q.defer();
-        ble.notify(deviceID, serviceUUID, characteristicUUID, function (result) {
+        ble.startNotification(deviceID, serviceUUID, characteristicUUID, function (result) {
           q.resolve(result);
         }, function (error) {
           q.reject(error);
@@ -76,9 +87,9 @@ angular.module('ngCordova.plugins.ble', [])
         return q.promise;
       },
 
-      indicate: function (deviceID, serviceUUID, characteristicUUID) {
+      stopNotification: function (deviceID, serviceUUID, characteristicUUID) {
         var q = $q.defer();
-        ble.indicate(deviceID, serviceUUID, characteristicUUID, function (result) {
+        ble.stopNotification(deviceID, serviceUUID, characteristicUUID, function (result) {
           q.resolve(result);
         }, function (error) {
           q.reject(error);

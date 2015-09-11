@@ -14,13 +14,18 @@ var gulp = require('gulp'),
   changelog = require('conventional-changelog'),
   q = require('q'),
   fs = require('fs'),
-  jscs = require('gulp-jscs');
+  jscs = require('gulp-jscs'),
+  git = require('gulp-git');
 
-gulp.task('default', ['build']);
+gulp.task('default', ['git', 'build']);
 
-gulp.task('test', ['lint', 'jscs']);
+gulp.task('lint', ['jshint', 'jscs']);
 
-gulp.task('build', function () {
+gulp.task('git', function(cb) {
+    git.updateSubmodule({ args: '--init --remote' }, cb);
+});
+
+gulp.task('build', ['git'], function () {
   gulp.src(buildConfig.mockFiles)
     .pipe(concat('ng-cordova-mocks.js'))
     .pipe(header(buildConfig.closureStart))
@@ -77,10 +82,11 @@ gulp.task('karma', function (done) {
   karma.start(karmaConf, done);
 });
 
-gulp.task('lint', function () {
+gulp.task('jshint', function () {
   return gulp.src('./src/plugins/*.js')
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('jscs', function () {

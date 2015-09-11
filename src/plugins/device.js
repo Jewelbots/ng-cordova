@@ -1,6 +1,7 @@
 // install   :     cordova plugin add cordova-plugin-device
 // link      :     https://github.com/apache/cordova-plugin-device
 
+/* globals device: true */
 angular.module('ngCordova.plugins.device', [])
 
   .factory('$cordovaDevice', [function () {
@@ -66,6 +67,14 @@ angular.module('ngCordova.plugins.device', [])
        */
       getVersion: function () {
         return device.version;
+      },
+
+      /**
+       * Returns the device manufacturer.
+       * @returns {String}
+       */
+      getManufacturer: function () {
+        return device.manufacturer;
       }
     };
   }]);

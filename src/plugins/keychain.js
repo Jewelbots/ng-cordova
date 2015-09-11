@@ -1,17 +1,15 @@
 // install   :      cordova plugin add https://github.com/shazron/KeychainPlugin.git
 // link      :      https://github.com/shazron/KeychainPlugin
 
+/* globals Keychain: true */
 angular.module('ngCordova.plugins.keychain', [])
 
-  .factory('$cordovaKeychain', ['$q', '$window', function ($q, $window) {
-
-    if ('Keychain' in $window) {
-      var kc = new Keychain();
-    }
+  .factory('$cordovaKeychain', ['$q', function ($q) {
 
     return {
       getForKey: function (key, serviceName) {
-        var defer = $q.defer();
+        var defer = $q.defer(),
+            kc = new Keychain();
 
         kc.getForKey(defer.resolve, defer.reject, key, serviceName);
 
@@ -19,7 +17,8 @@ angular.module('ngCordova.plugins.keychain', [])
       },
 
       setForKey: function (key, serviceName, value) {
-        var defer = $q.defer();
+        var defer = $q.defer(),
+            kc = new Keychain();
 
         kc.setForKey(defer.resolve, defer.reject, key, serviceName, value);
 
@@ -27,7 +26,8 @@ angular.module('ngCordova.plugins.keychain', [])
       },
 
       removeForKey: function (key, serviceName) {
-        var defer = $q.defer();
+        var defer = $q.defer(),
+            kc = new Keychain();
 
         kc.removeForKey(defer.resolve, defer.reject, key, serviceName);
 

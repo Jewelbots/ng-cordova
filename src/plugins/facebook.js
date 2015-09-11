@@ -1,13 +1,20 @@
 // install   :   cordova -d plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="123456789" --variable APP_NAME="myApplication"
 // link      :   https://github.com/Wizcorp/phonegap-facebook-plugin
 
+/* globals facebookConnectPlugin: true */
 angular.module('ngCordova.plugins.facebook', [])
 
   .provider('$cordovaFacebook', [function () {
 
+    /**
+      * Init browser settings for Facebook plugin
+      *
+      * @param {number} id
+      * @param {string} version
+      */
     this.browserInit = function (id, version) {
       this.appID = id;
-      this.appVersion = version || "v2.0";
+      this.appVersion = version || 'v2.0';
       facebookConnectPlugin.browserInit(this.appID, this.appVersion);
     };
 
